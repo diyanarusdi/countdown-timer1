@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Countdown</title>
+<style>
+body{font-family:Arial;background:#1a1a2e;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;text-align:center;padding:20px}
+.timer{font-size:4rem;font-weight:bold;color:#00ff9d;text-shadow:0 0 20px #00ff9d;margin:20px 0}
+.btn{padding:12px 24px;margin:5px;font-size:1.1rem;border:none;border-radius:25px;cursor:pointer;transition:.3s}
+.start{background:#00ff9d;color:#000}
+.stop{background:#ff4757;color:#fff}
+.reset{background:#ffa502;color:#000}
+.btn:hover{transform:scale(1.1)}
+input{padding:12px;width:80px;margin:5px;font-size:1rem;border:2px solid #00ff9d;border-radius:10px;background:#16213e;color:#fff}
+</style>
+</head>
+<body>
+<h1>COUNTDOWN TIMER</h1>
+<div>
+<input type="number" id="h" placeholder="Jam" min="0">
+<input type="number" id="m" placeholder="Min" min="0" max="59">
+<input type="number" id="s" placeholder="Saat" min="0" max="59">
+</div>
+<button class="btn start" onclick="start()">MULA</button>
+<button class="btn stop" onclick="stop()">STOP</button>
+<button class="btn reset" onclick="reset()">RESET</button>
+<div class="timer" id="display">00:00:00</div>
+
+<script>
+let t,i=0,r=!1;
+function start(){if(r)return;let e=parseInt(document.getElementById("h").value)||0,a=parseInt(document.getElementById("m").value)||0,n=parseInt(document.getElementById("s").value)||0;if(i=e*3600+a*60+n,i<=0)return alert("Masukkan masa!");r=!0,u(),t=setInterval(()=>{i<=0?(clearInterval(t),r=!1,document.getElementById("display").innerHTML="TAMAT!",alert("Masa Habis!")):(i--,u())},1e3)}
+function stop(){clearInterval(t),r=!1}
+function reset(){stop(),i=0,u(),document.querySelectorAll("input").forEach(e=>e.value="")}
+function u(){let e=Math.floor(i/3600),a=Math.floor((i%3600)/60),n=i%60;document.getElementById("display").innerHTML=`${e.toString().padStart(2,"0")}:${a.toString().padStart(2,"0")}:${n.toString().padStart(2,"0")}`}
+</script>
+</body>
+</html>
